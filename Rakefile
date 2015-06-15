@@ -279,11 +279,6 @@ FILE
     Rake::Task["buildpack:publish"].invoke
     Rake::Task["buildpack:tag"].invoke
   end
-  
-  desc "build swagger API docs"
-  task :swaggerdocs do
-    Rake::Task['swagger:docs'].invoke
-  end
 end
 
 begin
