@@ -102,6 +102,28 @@ private
       end
     end
   end
+  
+  def run_swagger_docs_rake_task
+    instrument 'ruby.run_swagger_docs_rake_task' do
+
+     docs = rake.task("swagger:docs")
+     return true unless docs.is_defined?
+
+     topic "Generating Swagger documentation"
+     docs.invoke(env: rake_env)
+     if docs.success?
+       puts "Swagger documentation generation completed (#{"%.2f" % docs.time}s)"
+     else
+       swagger_docs_fail(docs.output)
+     end
+   end
+  end
+
+  def swagger_docs_fail(output)
+    log "swagger_docs", :status => "failure"
+    msg = "Generating Swagger documentation failed.\n"
+    error msg
+  end
 
   def rake_env
     if user_env_hash.empty?
