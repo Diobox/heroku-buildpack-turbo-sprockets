@@ -82,7 +82,7 @@ class LanguagePack::Ruby < LanguagePack::Base
   def compile
     instrument 'ruby.compile' do
       # check for new app at the beginning of the compile
-      new_app?
+      #new_app?
       Dir.chdir(build_path)
       remove_vendor_bundle
       install_ruby
